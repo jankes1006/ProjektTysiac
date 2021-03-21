@@ -1,0 +1,102 @@
+object Form2: TForm2
+  Left = 260
+  Top = 196
+  Width = 1044
+  Height = 540
+  Caption = 'Tysiac - Menu'
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  PixelsPerInch = 96
+  TextHeight = 13
+  object tysiacLabel: TLabel
+    Left = 376
+    Top = 104
+    Width = 208
+    Height = 37
+    Caption = 'Tysiac - Menu:'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -32
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+  end
+  object nazwaUzytkownika: TEdit
+    Left = 304
+    Top = 168
+    Width = 249
+    Height = 33
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 0
+    Text = 'Player 1'
+  end
+  object nowaGra: TButton
+    Left = 568
+    Top = 168
+    Width = 185
+    Height = 33
+    Caption = 'Nowa Gra'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 1
+    OnClick = nowaGraClick
+  end
+  object statystyki: TButton
+    Left = 392
+    Top = 224
+    Width = 185
+    Height = 33
+    Caption = 'Ranking'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 2
+  end
+  object autorzy: TButton
+    Left = 392
+    Top = 272
+    Width = 185
+    Height = 33
+    Caption = 'Autorzy'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 3
+    OnClick = autorzyClick
+  end
+  object koniecGry: TButton
+    Left = 392
+    Top = 320
+    Width = 185
+    Height = 33
+    Caption = 'Wyjd'#378' z Gry'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -20
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    ParentFont = False
+    TabOrder = 4
+    OnClick = koniecGryClick
+  end
+end

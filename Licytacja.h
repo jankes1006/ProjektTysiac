@@ -1,0 +1,31 @@
+#ifndef _Licytacja_h
+#define _Licytacja_h
+#include "Karta.h"
+
+class Licytacja
+{
+        private:
+                int zwyciezca; //zawiera numer zwyciezcy licytacji
+                bool czyPas[3]; //zawiera informacje o graczach ktorzy spasowali, true jezeli spasowal
+                bool bomby[3]; //zawiera informacje ktory gracz wzial bombe
+                int musik; //zawiera informacje ktory z graczy jest aktualnie na musiku
+                int kwotaLicytacji; //zawiera informacje o kwocie za ktora zostala wygrana tura
+                Karta* kartyLicytacji[3];
+
+        public:
+                Licytacja();
+                void podbijPasuj(bool wybor, int kto); // funkcja podbijajaca(true), lub pasujaca(false), ktory gracz pasuje, podbija
+                bool wezBombe(int ktoryGracz, bool takNie); //funkcja wpisujaca bombke graczowi ktoryGracz, bool jezeli tak to true, false to nie
+                int dajKwoteLicytacji(); // funkcja zwracajaca kwote licytacji
+                bool czyGraczUgral(int punktyGracza); // funkcja ktora okresli czy gracz ugral czy tez nie
+                void resetUstawien(); // przesuwa musika na nastepnego i rozpoczyna na nowo licytacjie
+                int ktoMusik(); //zwraca kto ma musik
+                bool czyTrwaLicytacja(); // funkcja okreslajaca czy jest jeden zwyciezca
+                void wezKarte(Karta *k); //funkcja do pobierania kart o ktore bedzie trwala licytacja
+                Karta* dajKarteWyswietlenie(int ktora); //funkcja podajaca i ta karte do wyswietlenia
+                bool czyGraczPosowal(int ktory);
+                int dajZwyciezce();
+                void ustawZwyciezce();//funkcja potrzebna kiedy boty od razu spasowaly
+
+};
+#endif

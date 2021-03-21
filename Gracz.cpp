@@ -1,0 +1,149 @@
+#include "Gracz.h"
+
+using namespace std;
+
+Gracz::Gracz(){}
+
+Gracz::Gracz(String _nazwa) : nazwaGracza(_nazwa)
+{
+    punkty=0;
+    for(int i=0; i<10; i++)
+    {
+        taliaGracza[i]=NULL;
+    }
+}
+
+void Gracz::wezKarte(Karta* wsk)
+{
+    Kolor kolorWkladanej=wsk->dajKolor();
+    int punktyWkladanej=wsk->dajPunkty();
+
+    for(int i=0; i<10; i++)
+    {
+        if(taliaGracza[i]==NULL) //sprawdzamy czy jest wolne miejsce w talii
+        {
+            taliaGracza[i]=wsk;
+            break;
+        }
+
+
+        if(taliaGracza[i]->dajKolor()==kolorWkladanej)//jezeli jestesmy aktualnie na elemencie tablicy o tym samym kolorze
+        {                                             //to ustawimy go za przestawiajac poszczegolne karty, tak aby
+                                                      //na poczatku byla karta o najwyzjszej wartosc
+            while (taliaGracza[i] != NULL && punktyWkladanej < taliaGracza[i]->dajPunkty() && kolorWkladanej == taliaGracza[i]->dajKolor())
+            {
+                i++;
+            }
+
+            while (taliaGracza[i] != NULL)
+            {
+                swap(taliaGracza[i],wsk);
+                i++;
+            }
+
+            taliaGracza[i]=wsk;
+            break;
+        }
+    }
+}
+
+Karta* Gracz::dajKarteWyswietlenie(int ktora)
+{
+        if(ktora<=0) return NULL;
+        int ktoraPom=0;
+
+        for(int i=0; i<10; i++)
+        {
+                if(taliaGracza[i]!=NULL)
+                {
+                        ktoraPom++;
+                        if(ktora==ktoraPom) return taliaGracza[i];
+                }
+        }
+
+        return NULL;
+}
+
+String Gracz::dajNazwe()
+{
+        return  nazwaGracza;
+}
+
+Karta* Gracz::dajKarteRozgrywka(int &meldunek, int ktora)
+{
+        int nr=0; //zmienna bedzie przechowywala indeks tablicy pod ktora sie znajduje dana karta
+        for(int i=0; i<10; i++) //znalezienie karty okreslonej
+        {
+
+                if(taliaGracza[i]!=NULL)
+                {
+                        nr++;
+                        if(nr==ktora)
+                        {
+                                nr=i; break;
+                        }
+                }
+        }
+
+        bool czyMeldunek=false;
+
+    if(taliaGracza[nr]->dajFigure()==dama || taliaGracza[nr]->dajFigure()==krol) //sprawdzamy czy gracz nie rzucil meldunkiem
+    {
+        if(taliaGracza[nr]->dajFigure()==dama)
+        {
+            for(int i=0; i<10; i++)
+            {
+                if(taliaGracza[i]!=NULL && taliaGracza[i]->dajFigure()==krol && taliaGracza[i]->dajKolor()==taliaGracza[nr]->dajKolor() && i!=nr)
+                {
+                    czyMeldunek=true;
+                    break;
+                }
+            }
+        }else if(taliaGracza[nr]->dajFigure()==krol)
+        {
+            for(int i=0; i<10; i++)
+            {
+                if(taliaGracza[i]!=NULL && taliaGracza[i]->dajFigure()==dama && taliaGracza[i]->dajKolor()==taliaGracza[nr]->dajKolor() && i!=nr)
+                {
+                    czyMeldunek=true;
+                    break;
+                }
+            }
+        }
+    }
+
+    if(czyMeldunek==true) //zwrocenie odpowiedniej wartosci meldunku, zostanie ona przekazana za pomoca referencji
+    {                     //argumentu meldunek
+       switch(taliaGracza[nr]->dajKolor())
+       {
+            case kier:
+                meldunek=100;
+                break;
+
+            case karo:
+                meldunek=80;
+                break;
+
+            case trefl:
+                meldunek=60;
+                break;
+
+            case pik:
+                meldunek=40;
+                break;
+       }
+    }else
+    {
+        meldunek=0;
+    }
+
+    Karta* pom=taliaGracza[nr];
+    taliaGracza[nr]=NULL; //usuniecie pamieci w talii o karcie aktualnie wybranej
+
+    return pom;
+}
+
+void Gracz::zmienNazwe(String nazwa)
+{
+        nazwaGracza=nazwa;
+}
